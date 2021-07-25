@@ -5,6 +5,7 @@ const (
 	EMPTY ObjectType = 1
 	GUNMAN ObjectType = 2
 	WALL ObjectType = 3
+	BULLET_TRACE ObjectType = 4
 )
 
 
@@ -14,7 +15,6 @@ type Box struct {
 	Top *Box
 	Down *Box
 	ObjType ObjectType
-	Value int
 }
 
 func isTopLeftCorner(r int, c int, row int, col int) bool {
@@ -53,12 +53,10 @@ func GenerateLinkedList(row int, col int) [][]*Box {
 	row = row - 1
 	col = col - 1
 	arrBox := [][]*Box{}
-	val := 0
 	for r := 0; r <= row; r++ {
 		row := []*Box{}
 		for c := 0; c <= col; c++ {
-			row = append(row, &Box{Value: val})
-			val+=1
+			row = append(row, &Box{ObjType: EMPTY})
 		}
 		arrBox = append(arrBox, row)
 	}
